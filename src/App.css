@@ -1,8 +1,29 @@
-body{overflow:hidden}
+body{overflow:hidden;}
 
+.app {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: #666;
+}
 .box{
   height: 100px;
   width: 100px;
   background: lightblue;
   position:absolute;
 }
+
+.canvas {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+}
+
+.line {position: absolute; top: 100px; height: 5px; background:black; width: 120px;}
+.line1 {top: 200px; }
+.line2 {top: 300px; }
+.line3 {top: 400px; }
+.line4 {top: 500px; }
