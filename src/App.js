@@ -6,10 +6,8 @@ import img2 from "./img/photo2.jpg";
 import img3 from "./img/photo3.jpg";
 import "./App.css";
 
-const state = proxy({ speed: 0 });
-
 function App() {
-  const snapshot = useProxy(state);
+  // const speed = useRef();
   const scroll = useRef();
   const wrap = useRef();
   let speed = useRef(0);
@@ -36,16 +34,15 @@ function App() {
     let rounded = Math.round(position.current);
     let diff = rounded - position.current;
     position.current += Math.sign(diff) * Math.pow(Math.abs(diff), 0.7) * 0.035;
-    state.speed = position.current;
     wrap.current.style.transform = `translate(0, ${
       -position.current * 100 + 50
     }px`;
     requestAnimationFrame(() => scrolling());
-  }, []);
+  }, [elems, objs]);
 
   useEffect(() => {
     requestAnimationFrame(() => scrolling());
-  }, [scrolling]);
+  }, []);
 
   const onWheel = (e) => {
     return (speed.current += e.deltaY * 0.0003);
@@ -57,7 +54,7 @@ function App() {
       onWheel={onWheel}
       // onTouchMove={onTouchMove}
     >
-      <div className="box"></div>
+      <div className="box">{speed.current}</div>
       <div className="wrap" ref={wrap}>
         <div className="line" ref={e1}>
           <img src={img1} width={50} alt="nah" />
@@ -75,7 +72,7 @@ function App() {
           <img src={img2} width={50} alt="nah" />
         </div>
       </div>
-      <SlideShow forwardRef={snapshot.speed} />
+      <SlideShow forwardRef={position} />
     </div>
   );
 }
