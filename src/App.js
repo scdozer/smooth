@@ -45,11 +45,11 @@ function App() {
   const objs = Array(5).fill({ dist: 0 });
 
   const scrolling = useCallback(() => {
-    objs.forEach((o, i) => {
-      o.dist = Math.min(Math.abs(position.current - i), 1);
-      o.dist = 1 - o.dist ** 2;
-      elems[i].current.style.transform = `scale(${1 + 0.4 * o.dist})`;
-    });
+    // objs.forEach((o, i) => {
+    //   o.dist = Math.min(Math.abs(position.current - i), 1);
+    //   o.dist = 1 - o.dist ** 2;
+    //   elems[i].current.style.transform = `scale(${1 + 0.4 * o.dist})`;
+    // });
 
     position.current += speed.current;
     speed.current *= 0.8;
@@ -59,12 +59,9 @@ function App() {
     slideContent.current.innerHTML = `<h1>${
       content[rounded] ? content[rounded].title : ""
     }</h1><p>${content[rounded] ? content[rounded].description : ""}</p>`;
-    slideContent.current.style.opacity = `translate(0,${
-      position.current * 100
-    }px)`;
-    wrap.current.style.transform = `translate(0, ${
-      -position.current * 100 - 50
-    }px`;
+    // wrap.current.style.transform = `translate(0, ${
+    //   -position.current * 100 - 50
+    // }px`;
     requestAnimationFrame(() => scrolling());
   }, [elems, objs]);
 
@@ -82,8 +79,8 @@ function App() {
       onWheel={onWheel}
       // onTouchMove={onTouchMove}
     >
-      <div className="box"></div>
-      <div className="wrap" ref={wrap}>
+      {/* <div className="box"></div> */}
+      {/* <div className="wrap" ref={wrap}>
         <div className="line" ref={e1}>
           <img src={img1} width={50} alt="nah" />
         </div>
@@ -99,7 +96,7 @@ function App() {
         <div className="line line4" ref={e5}>
           <img src={img2} width={50} alt="nah" />
         </div>
-      </div>
+      </div> */}
       <div className="slideContent" ref={slideContent}></div>
       <SlideShow forwardRef={position} />
     </div>

@@ -8,11 +8,11 @@ export default function Image({ img, index, forwardRef }) {
   const texture = useLoader(THREE.TextureLoader, img);
   useFrame(({ clock }) => {
     mesh.current.time = clock.elapsedTime;
-    outer.current.position.set(0, -index * 4.2 + forwardRef.current * 4.2, 0);
+    outer.current.position.set(0, -index * 5.2 + forwardRef.current * 5.2, 0);
   });
   return (
     <mesh ref={outer} rotation={[0, -0.25, 0]}>
-      <planeBufferGeometry attach="geometry" args={[6, 4, 20, 20]} />
+      <planeBufferGeometry attach="geometry" args={[7.5, 5, 20, 20]} />
       <wackyImage
         ref={mesh}
         attach="material"
