@@ -6,7 +6,7 @@ import img3 from "./img/photo3.jpg";
 import "./App.css";
 
 function App() {
-  // const speed = useRef();
+  const slideContent = useRef();
   const scroll = useRef();
   const wrap = useRef();
   let speed = useRef(0);
@@ -18,7 +18,29 @@ function App() {
   const e4 = useRef();
   const e5 = useRef();
   const elems = useMemo(() => [e1, e2, e3, e4, e5], [e1, e2, e3, e4, e5]);
-  // const elems = [e1, e2, e3, e4, e5];
+
+  const content = [
+    {
+      title: "Title 1",
+      description: "description 1 description 1 description 1",
+    },
+    {
+      title: "Title 2",
+      description: "description 2 description 2 description 2",
+    },
+    {
+      title: "Title 3",
+      description: "description 3 description 3 description 3",
+    },
+    {
+      title: "Title 4",
+      description: "description 4 description 4 description 4",
+    },
+    {
+      title: "Title 5",
+      description: "description 5 description 5 description 5",
+    },
+  ];
 
   const objs = Array(5).fill({ dist: 0 });
 
@@ -34,6 +56,12 @@ function App() {
     let rounded = Math.round(position.current);
     let diff = rounded - position.current;
     position.current += Math.sign(diff) * Math.pow(Math.abs(diff), 0.7) * 0.035;
+    slideContent.current.innerHTML = `<h1>${
+      content[rounded] ? content[rounded].title : ""
+    }</h1><p>${content[rounded] ? content[rounded].description : ""}</p>`;
+    slideContent.current.style.opacity = `translate(0,${
+      position.current * 100
+    }px)`;
     wrap.current.style.transform = `translate(0, ${
       -position.current * 100 - 50
     }px`;
@@ -72,6 +100,7 @@ function App() {
           <img src={img2} width={50} alt="nah" />
         </div>
       </div>
+      <div className="slideContent" ref={slideContent}></div>
       <SlideShow forwardRef={position} />
     </div>
   );
