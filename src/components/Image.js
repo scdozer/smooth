@@ -7,7 +7,6 @@ export default function Image({ img, index, forwardRef }) {
   const outer = useRef();
   const texture = useLoader(THREE.TextureLoader, img);
   useFrame(({ clock }) => {
-    console.log(forwardRef.current);
     mesh.current.time = clock.elapsedTime;
     outer.current.position.set(0, -index * 4.2 + forwardRef.current * 4.2, 0);
   });

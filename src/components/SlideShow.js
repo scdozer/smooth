@@ -1,14 +1,14 @@
-import React, { Suspense, useRef } from "react";
+import React, { Suspense } from "react";
 import Image from "./Image.js";
-import { Canvas, useFrame } from "react-three-fiber";
-import { OrbitControls } from "drei";
+import { Canvas } from "react-three-fiber";
+// import { OrbitControls } from "drei";
 import "./../shaders/wackyImg";
 
 import img1 from "./../img/photo1.jpg";
 import img2 from "./../img/photo2.jpg";
 import img3 from "./../img/photo3.jpg";
 
-const images = [img1, img2, img3, img2, img3];
+const images = [img1, img2, img3, img1, img2];
 
 export default function SlideShow({ forwardRef }) {
   return (

@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useCallback } from "react";
-import { proxy, useProxy } from "valtio";
+import React, { useEffect, useRef, useCallback, useMemo } from "react";
 import SlideShow from "./components/SlideShow";
 import img1 from "./img/photo1.jpg";
 import img2 from "./img/photo2.jpg";
@@ -18,7 +17,8 @@ function App() {
   const e3 = useRef();
   const e4 = useRef();
   const e5 = useRef();
-  const elems = [e1, e2, e3, e4, e5];
+  const elems = useMemo(() => [e1, e2, e3, e4, e5], [e1, e2, e3, e4, e5]);
+  // const elems = [e1, e2, e3, e4, e5];
 
   const objs = Array(5).fill({ dist: 0 });
 
@@ -35,7 +35,7 @@ function App() {
     let diff = rounded - position.current;
     position.current += Math.sign(diff) * Math.pow(Math.abs(diff), 0.7) * 0.035;
     wrap.current.style.transform = `translate(0, ${
-      -position.current * 100 + 50
+      -position.current * 100 - 50
     }px`;
     requestAnimationFrame(() => scrolling());
   }, [elems, objs]);
@@ -54,7 +54,7 @@ function App() {
       onWheel={onWheel}
       // onTouchMove={onTouchMove}
     >
-      <div className="box">{speed.current}</div>
+      <div className="box"></div>
       <div className="wrap" ref={wrap}>
         <div className="line" ref={e1}>
           <img src={img1} width={50} alt="nah" />
