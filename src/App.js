@@ -8,7 +8,7 @@ import "./App.css";
 function App() {
   const slideContent = useRef();
   const scroll = useRef();
-  const wrap = useRef();
+  const scale = useRef([]);
   let speed = useRef(0);
   let position = useRef(0);
 
@@ -45,11 +45,13 @@ function App() {
   const objs = Array(5).fill({ dist: 0 });
 
   const scrolling = useCallback(() => {
-    // objs.forEach((o, i) => {
-    //   o.dist = Math.min(Math.abs(position.current - i), 1);
-    //   o.dist = 1 - o.dist ** 2;
-    //   elems[i].current.style.transform = `scale(${1 + 0.4 * o.dist})`;
-    // });
+    objs.forEach((o, i) => {
+      o.dist = Math.min(Math.abs(position.current - i), 1);
+      o.dist = 1 - o.dist ** 2;
+
+      scale.current[i] = 1 + 0.4 * o.dist;
+      // elems[i].current.style.transform = `scale(${1 + 0.4 * o.dist})`;
+    });
 
     position.current += speed.current;
     speed.current *= 0.8;
@@ -59,9 +61,6 @@ function App() {
     slideContent.current.innerHTML = `<h1>${
       content[rounded] ? content[rounded].title : ""
     }</h1><p>${content[rounded] ? content[rounded].description : ""}</p>`;
-    // wrap.current.style.transform = `translate(0, ${
-    //   -position.current * 100 - 50
-    // }px`;
     requestAnimationFrame(() => scrolling());
   }, [elems, objs]);
 
@@ -98,7 +97,7 @@ function App() {
         </div>
       </div> */}
       <div className="slideContent" ref={slideContent}></div>
-      <SlideShow forwardRef={position} />
+      <SlideShow yPosition={position} slideScale={scale} />
     </div>
   );
 }
