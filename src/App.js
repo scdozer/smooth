@@ -50,7 +50,6 @@ function App() {
       o.dist = 1 - o.dist ** 2;
 
       scale.current[i] = 1 + 0.4 * o.dist;
-      // elems[i].current.style.transform = `scale(${1 + 0.4 * o.dist})`;
     });
 
     position.current += speed.current;
@@ -58,11 +57,23 @@ function App() {
     let rounded = Math.round(position.current);
     let diff = rounded - position.current;
     position.current += Math.sign(diff) * Math.pow(Math.abs(diff), 0.7) * 0.035;
-    slideContent.current.innerHTML = `<h1>${
-      content[rounded] ? content[rounded].title : ""
-    }</h1><p>${content[rounded] ? content[rounded].description : ""}</p>`;
+
+    // this needs to be reliant on data and not hard coded...
+    if (rounded < 0) {
+      slideContent.current.innerHTML = `<h1>${
+        content[0] ? content[0].title : ""
+      }</h1><p>${content[0] ? content[0].description : ""}</p>`;
+    } else if (rounded > 4) {
+      slideContent.current.innerHTML = `<h1>${
+        content[4] ? content[4].title : ""
+      }</h1><p>${content[4] ? content[4].description : ""}</p>`;
+    } else {
+      slideContent.current.innerHTML = `<h1>${
+        content[rounded] ? content[rounded].title : ""
+      }</h1><p>${content[rounded] ? content[rounded].description : ""}</p>`;
+    }
     requestAnimationFrame(() => scrolling());
-  }, [elems, objs]);
+  }, [content, objs]);
 
   useEffect(() => {
     requestAnimationFrame(() => scrolling());
@@ -72,30 +83,7 @@ function App() {
     return (speed.current += e.deltaY * 0.0003);
   };
   return (
-    <div
-      className="app"
-      ref={scroll}
-      onWheel={onWheel}
-      // onTouchMove={onTouchMove}
-    >
-      {/* <div className="box"></div> */}
-      {/* <div className="wrap" ref={wrap}>
-        <div className="line" ref={e1}>
-          <img src={img1} width={50} alt="nah" />
-        </div>
-        <div className="line line1" ref={e2}>
-          <img src={img2} width={50} alt="nah" />
-        </div>
-        <div className="line line2" ref={e3}>
-          <img src={img3} width={50} alt="nah" />
-        </div>
-        <div className="line line3" ref={e4}>
-          <img src={img1} width={50} alt="nah" />
-        </div>
-        <div className="line line4" ref={e5}>
-          <img src={img2} width={50} alt="nah" />
-        </div>
-      </div> */}
+    <div className="app" ref={scroll} onWheel={onWheel}>
       <div className="slideContent" ref={slideContent}></div>
       <SlideShow yPosition={position} slideScale={scale} />
     </div>

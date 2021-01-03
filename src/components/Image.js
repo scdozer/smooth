@@ -9,11 +9,8 @@ export default function Image({ img, index, yPosition, slideScale }) {
   useFrame(({ clock }) => {
     mesh.current.time = clock.elapsedTime;
     if (yPosition.current >= 0 && yPosition.current < 4) {
-      outer.current.position.set(
-        -slideScale.current[index],
-        -index * 5.2 + yPosition.current * 5.2,
-        0
-      );
+      // outer.current.rotation.set(0, 0, 0);
+      outer.current.position.set(0, -index * 6.2 + yPosition.current * 6.2, 0);
     }
     outer.current.scale.set(
       slideScale.current[index],
