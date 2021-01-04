@@ -61,19 +61,19 @@ function App() {
     position.current += Math.sign(diff) * Math.pow(Math.abs(diff), 0.7) * 0.035;
 
     // this needs to be reliant on data and not hard coded...
-    if (rounded < 0) {
-      slideContent.current.innerHTML = `<h1>${
-        content[0] ? content[0].title : ""
-      }</h1><p>${content[0] ? content[0].description : ""}</p>`;
-    } else if (rounded > 4) {
-      slideContent.current.innerHTML = `<h1>${
-        content[4] ? content[4].title : ""
-      }</h1><p>${content[4] ? content[4].description : ""}</p>`;
-    } else {
-      slideContent.current.innerHTML = `<h1>${
-        content[rounded] ? content[rounded].title : ""
-      }</h1><p>${content[rounded] ? content[rounded].description : ""}</p>`;
-    }
+    // if (rounded < 0) {
+    //   slideContent.current.innerHTML = `<h1>${
+    //     content[0] ? content[0].title : ""
+    //   }</h1><p>${content[0] ? content[0].description : ""}</p>`;
+    // } else if (rounded > 4) {
+    //   slideContent.current.innerHTML = `<h1>${
+    //     content[4] ? content[4].title : ""
+    //   }</h1><p>${content[4] ? content[4].description : ""}</p>`;
+    // } else {
+    //   slideContent.current.innerHTML = `<h1>${
+    //     content[rounded] ? content[rounded].title : ""
+    //   }</h1><p>${content[rounded] ? content[rounded].description : ""}</p>`;
+    // }
     requestAnimationFrame(() => scrolling());
   }, [content, objs]);
 
@@ -86,7 +86,11 @@ function App() {
   };
   return (
     <div className="app" ref={scroll} onWheel={onWheel}>
-      <div className="slideContent" ref={slideContent}></div>
+      {/* <div
+        className="slideContent"
+        ref={slideContent}
+        onClick={() => console.log("hey")}
+      ></div> */}
       <SlideShow yPosition={position} slideScale={scale} distance={distance} />
     </div>
   );
