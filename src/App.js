@@ -8,6 +8,7 @@ import "./App.css";
 function App() {
   const slideContent = useRef();
   const scroll = useRef();
+  const distance = useRef([]);
   const scale = useRef([]);
   let speed = useRef(0);
   let position = useRef(0);
@@ -49,7 +50,8 @@ function App() {
       o.dist = Math.min(Math.abs(position.current - i), 1);
       o.dist = 1 - o.dist ** 2;
 
-      scale.current[i] = 1 + 0.4 * o.dist;
+      scale.current[i] = 1 + 0.8 * o.dist;
+      distance.current[i] = o.dist;
     });
 
     position.current += speed.current;
@@ -85,7 +87,7 @@ function App() {
   return (
     <div className="app" ref={scroll} onWheel={onWheel}>
       <div className="slideContent" ref={slideContent}></div>
-      <SlideShow yPosition={position} slideScale={scale} />
+      <SlideShow yPosition={position} slideScale={scale} distance={distance} />
     </div>
   );
 }

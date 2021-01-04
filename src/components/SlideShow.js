@@ -10,7 +10,7 @@ import img3 from "./../img/photo3.jpg";
 
 const images = [img1, img2, img3, img1, img2];
 
-export default function SlideShow({ yPosition, slideScale }) {
+export default function SlideShow({ yPosition, slideScale, distance }) {
   return (
     <div className="canvas">
       <Canvas colorManagement>
@@ -24,6 +24,7 @@ export default function SlideShow({ yPosition, slideScale }) {
                 img={img}
                 yPosition={yPosition}
                 slideScale={slideScale}
+                distance={distance}
               />
             ))}
           </group>
