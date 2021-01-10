@@ -32,7 +32,7 @@ p, h1, h2, h3, h4 {
 
 .slideContent {
   padding-top: calc(100vh - 270px);
-  padding-left: 200px;
+  padding-left: calc(100vw - 80vw);
   left: 10%;
   z-index: 2;
 }

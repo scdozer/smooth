@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import Image from "./Image.js";
 import { Canvas } from "react-three-fiber";
-// import { OrbitControls } from "drei";
+import { OrbitControls } from "drei";
 import "./../shaders/wackyImg";
 
 import img1 from "./../img/photo1.jpg";
@@ -14,7 +14,7 @@ export default function SlideShow({ yPosition, slideScale, distance }) {
   return (
     <div className="canvas">
       <Canvas colorManagement>
-        {/* <OrbitControls /> */}
+        <OrbitControls />
         <Suspense fallback={null}>
           <group>
             {images.map((img, i) => (
