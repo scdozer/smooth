@@ -19,8 +19,8 @@ const WackyImage = shaderMaterial(
     vUv = (uv -vec2(0.5))*0.9 + vec2(0.5);
     vec3 pos = position;
 
-    pos.y += sin(PI*uv.x) *0.08;
-    pos.z -= sin(PI*uv.x) *0.05;
+    pos.y += sin(PI*uv.x) *0.02;
+    pos.z -= sin(PI*uv.y) *0.02;
 
     pos.y += sin(time)*0.07;
     vUv += sin(time)*0.04;
