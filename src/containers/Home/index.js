@@ -39,7 +39,7 @@ function Home() {
   };
   function onPan(event, info) {
     let delta = info.delta.y > info.delta.x ? info.delta.y : info.delta.x;
-    return (speed.current += delta * 0.0003);
+    return (speed.current -= delta * 0.003);
   }
 
   return (
