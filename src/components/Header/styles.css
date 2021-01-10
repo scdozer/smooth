@@ -1,0 +1,20 @@
+.header {
+    margin: 20px 40px;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+}
+.header p, .header h1 {
+    color: white;
+    z-index: 10000000;
+}
+
+.header a {
+    text-decoration: none;
+    color: white;
+}
+
+.header p {
+    font-weight: bold;
+    margin-top: 10px;
+}
