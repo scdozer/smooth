@@ -1,54 +1,36 @@
-import React from "react";
-import { motion, useViewportScroll, useTransform } from "framer-motion";
-
-import { useInView } from "react-intersection-observer";
+import React, { useRef } from "react";
+import { motion } from "framer-motion";
+import { Parallax, ParallaxLayer } from "react-spring/renderprops-addons";
 // import "./styles.css";
 
+import img1 from "./../../img/taylor/1.jpg";
+import img2 from "./../../img/taylor/2.jpg";
+import img3 from "./../../img/taylor/3.jpg";
+
 export default function Projects() {
-  const { scrollY } = useViewportScroll();
-  const y1 = useTransform(scrollY, [0, 300], [0, 200]);
-  const y2 = useTransform(scrollY, [0, 300], [0, -100]);
-  const [ref, inView, entry] = useInView({
-    /* Optional options */
-    threshold: 0.5,
-    triggerOnce: false,
-  });
-
-  const variants = {
-    visible: { opacity: 1, scale: 1, y: 0 },
-    hidden: {
-      opacity: 0,
-      scale: 0.65,
-      y: 50,
-    },
-  };
-
+  let parallax = useRef();
   return (
-    <div className="projects">
-      <motion.h1
-        initial={{ y: -20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ ease: "easeIn", duration: 1 }}
-      >
-        Projects
-      </motion.h1>
-      <motion.div className="box" style={{ y: y1, x: -50 }} />
-      <motion.div
-        className="box"
-        style={{ y: y2, x: 50, background: "salmon" }}
-      />
-      <div style={{ height: 500 }} />
-      <div style={{ position: "fixed", top: 0, left: 0 }}>
-        {" "}
-        {"is in view? " + inView}
-      </div>
-      <motion.div
-        animate={inView ? "visible" : "hidden"}
-        variants={variants}
-        transition={{ duration: 2, ease: "easeOut" }}
-        ref={ref}
-        className="magic"
-      />
-    </div>
+    <motion.div
+      initial={{ y: -20, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ ease: "easeIn", duration: 1 }}
+      className="projects"
+    >
+      <Parallax ref={parallax} pages={3}>
+        <ParallaxLayer offset={0} speed={1} style={{ pointerEvents: "none" }}>
+          <img src={img1} style={{ width: "100%" }} />
+        </ParallaxLayer>
+        <ParallaxLayer
+          offset={1.7}
+          speed={-0.1}
+          style={{ pointerEvents: "none" }}
+        >
+          <img src={img2} style={{ width: "45%", marginLeft: "40%" }} />
+        </ParallaxLayer>
+        <ParallaxLayer offset={1} speed={0.3} style={{ pointerEvents: "none" }}>
+          <img src={img3} style={{ width: "50%", marginLeft: "5%" }} />
+        </ParallaxLayer>
+      </Parallax>
+    </motion.div>
   );
 }

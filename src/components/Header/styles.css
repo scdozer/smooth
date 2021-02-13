@@ -4,17 +4,32 @@
     display: flex;
     justify-content: space-between;
 }
-.header p, .header h1 {
+.header div {
+    z-index: 10;
+    color: #white;
+}
+
+.header h1 {
+    z-index: 10;
     color: white;
     z-index: 10000000;
+    font-family: 'Prata', serif;
+    margin: 0px;
+    padding:0px;
+    line-height:40px;
 }
 
 .header a {
+    z-index: 10;
     text-decoration: none;
     color: white;
+    font-family: 'Oswald', serif;
 }
 
 .header p {
-    font-weight: bold;
-    margin-top: 10px;
+    z-index: 10;
+    color: white;
+    margin-top:0px;
+    padding:0px;
+    font-family: 'Oswald', serif;
 }

@@ -1,4 +1,4 @@
-body{overflow:hidden;background: #000; font-family: 'Playfair Display', serif;}
+body{overflow:hidden;background: #0e0d0d; font-family: 'Prata', serif;}
 
 a {
   color: white;
@@ -6,6 +6,9 @@ a {
 }
 p, h1, h2, h3, h4 {
   color: white;
+}
+p, a, ul, li {
+  font-family: 'Roboto Condensed', sans-serif;
 }
 
 .app {
@@ -30,11 +33,22 @@ p, h1, h2, h3, h4 {
   z-index: 0;
 }
 
-.slideContent {
+/* .slideContent {
   padding-top: calc(100vh - 270px);
   padding-left: calc(100vw - 80vw);
   left: 10%;
   z-index: 2;
+} */
+.projects h1, .projects h2, .projects p {
+  color: black;
+}
+.projects {
+ position: absolute;
+ z-index:0;
+ top: 0;
+ left:0;
+ height: 100vh;
+ width:100%;
 }
 .slideContent h1 {
   color: #eee;
@@ -55,7 +69,7 @@ p, h1, h2, h3, h4 {
   padding:0;
 }
 .slide-button {
-  color: white;
+  color: black;
   cursor: pointer;
   margin:0;
   padding:0;
