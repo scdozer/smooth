@@ -16,19 +16,30 @@ export default function Projects() {
       transition={{ ease: "easeIn", duration: 1 }}
       className="projects"
     >
-      <Parallax ref={parallax} pages={3}>
+      <Parallax ref={parallax} pages={4}>
         <ParallaxLayer offset={0} speed={1} style={{ pointerEvents: "none" }}>
           <img src={img1} style={{ width: "100%" }} />
         </ParallaxLayer>
         <ParallaxLayer
-          offset={1.7}
+          offset={2.7}
           speed={-0.1}
           style={{ pointerEvents: "none" }}
         >
           <img src={img2} style={{ width: "45%", marginLeft: "40%" }} />
         </ParallaxLayer>
-        <ParallaxLayer offset={1} speed={0.3} style={{ pointerEvents: "none" }}>
+        <ParallaxLayer
+          offset={1.4}
+          speed={0.3}
+          style={{ pointerEvents: "none" }}
+        >
           <img src={img3} style={{ width: "50%", marginLeft: "5%" }} />
+        </ParallaxLayer>
+
+        <ParallaxLayer offset={3.7}>
+          <div>
+            <h1>NEXT</h1>
+            <img src={img3} style={{ width: "100%" }} />
+          </div>
         </ParallaxLayer>
       </Parallax>
     </motion.div>

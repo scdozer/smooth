@@ -14,7 +14,7 @@ export default function Header() {
         <h1>
           <Link to="/">bradyperron</Link>
         </h1>
-        <p>videographer&middot;editor&middot;director&middot;</p>
+        <p>videographer &middot; editor &middot; director</p>
       </motion.div>
       <motion.p
         initial={{ y: 30, opacity: 0 }}
