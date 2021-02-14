@@ -16,31 +16,46 @@ export default function Projects() {
       transition={{ ease: "easeIn", duration: 1 }}
       className="projects"
     >
-      <Parallax ref={parallax} pages={4}>
+      <Parallax ref={parallax} pages={4.5}>
         <ParallaxLayer offset={0} speed={1} style={{ pointerEvents: "none" }}>
           <img src={img1} style={{ width: "100%" }} />
         </ParallaxLayer>
         <ParallaxLayer
-          offset={2.7}
+          offset={2.2}
           speed={-0.1}
           style={{ pointerEvents: "none" }}
         >
           <img src={img2} style={{ width: "45%", marginLeft: "40%" }} />
         </ParallaxLayer>
         <ParallaxLayer
-          offset={1.4}
-          speed={0.3}
+          offset={1.2}
+          speed={0.7}
           style={{ pointerEvents: "none" }}
         >
           <img src={img3} style={{ width: "50%", marginLeft: "5%" }} />
         </ParallaxLayer>
 
-        <ParallaxLayer offset={3.7}>
+        <ParallaxLayer
+          offset={2.9}
+          speed={0.1}
+          style={{ pointerEvents: "none" }}
+        >
+          <img src={img3} style={{ width: "50%", marginLeft: "20%" }} />
+        </ParallaxLayer>
+
+        <ParallaxLayer
+          offset={3.9}
+          speed={1.2}
+          style={{ pointerEvents: "none" }}
+        >
+          <img src={img3} style={{ width: "100%" }} />
+        </ParallaxLayer>
+        {/* <ParallaxLayer offset={4}>
           <div>
             <h1>NEXT</h1>
             <img src={img3} style={{ width: "100%" }} />
           </div>
-        </ParallaxLayer>
+        </ParallaxLayer> */}
       </Parallax>
     </motion.div>
   );
