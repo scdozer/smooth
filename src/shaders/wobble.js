@@ -35,29 +35,29 @@ const WobbleImage = shaderMaterial(
     // vec4 textureColor = texture2D(texture1, vUv);
     // gl_FragColor = textureColor;
 
-
     float angle = 1.55;
     vec2 p = (vUv - vec2(0.5, 0.5)) * (1.0 - 0.1) + vec2(0.5, 0.5);
 
-        vec2 offset = (speed - 1.0) / 500.0 * vec2(cos(angle), sin(angle));
-        vec4 cr = texture2D(texture1, p + offset);
-        vec4 cga = texture2D(texture1, p);
-        vec4 cb = texture2D(texture1, p - offset);
+    vec2 offset = (speed - 1.0) / 500.0 * vec2(cos(angle), sin(angle));
+    vec4 cr = texture2D(texture1, p + offset);
+    vec4 cga = texture2D(texture1, p);
+    vec4 cb = texture2D(texture1, p - offset);
 
-        float avg = (cr.r + cga.g + cb.b + cga.a) / 3.0;
-        float pct = abs(distanceFromCenter);
-        // vec4 color = mix(vec4(vec3(avg), cga.a), vec4(cr.r, cga.g, cb.b, cga.a), distanceFromCenter);
-        
-        gl_FragColor = vec4(color);
-          // gl_FragColor = vec4(color);
-        // float pct = abs(sin(time));
-        if (speed == 1.0 || speed == -1.0){
-          vec4 color = mix(vec4(vec3(avg), cga.a), vec4(cr.r, cga.g, cb.b, cga.a), pct);
-          gl_FragColor = vec4(color);
-        } else {
-          vec4 color = mix(vec4(vec3(avg), cga.a), vec4(vec3(avg), cga.a), pct);
-          gl_FragColor = vec4(color);
-        }
+    float avg = (cr.r + cga.g + cb.b + cga.a) / 3.0;
+    float pct = abs(distanceFromCenter);
+    vec4 color = mix(vec4(vec3(avg), cga.a), vec4(cr.r, cga.g, cb.b, cga.a), distanceFromCenter);
+    gl_FragColor = vec4(color);
+
+    
+      // gl_FragColor = vec4(color);
+    // float pct = abs(sin(time));
+    // if (speed == 1.0 || speed == -1.0){
+    //   vec4 color = mix(vec4(vec3(avg), cga.a), vec4(cr.r, cga.g, cb.b, cga.a), pct);
+    //   gl_FragColor = vec4(color);
+    // } else {
+    //   vec4 color = mix(vec4(vec3(avg), cga.a), vec4(vec3(avg), cga.a), pct);
+    //   gl_FragColor = vec4(color);
+    // }
   }`
 );
 

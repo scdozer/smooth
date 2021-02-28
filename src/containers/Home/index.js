@@ -1,45 +1,32 @@
 import React, { useEffect, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
-import SlideShow from "./../../components/SlideShow";
-import HomeTitles from "./../../components/HomeTitles";
+import HomeTitles from "../../components/HomeTitles";
+import CircleSlider from "../../components/CircleSlider/CircleSlider";
 import "./../../App.css";
 
 function Home() {
   const scroll = useRef();
-  const distance = useRef([]);
-  const scale = useRef([]);
+  const shaderScroll = useRef(0);
   let speed = useRef(0);
-  let position = useRef(0);
-
-  const objs = Array(5).fill({ dist: 0 });
+  let position = useRef(-1);
 
   const scrolling = useCallback(() => {
-    objs.forEach((o, i) => {
-      o.dist = Math.min(Math.abs(position.current - i), 1);
-      o.dist = 1 - o.dist ** 2;
-
-      scale.current[i] = 1 + 0.8 * o.dist;
-      distance.current[i] = o.dist;
-    });
-
     position.current += speed.current;
     speed.current *= 0.8;
-    let rounded = Math.round(position.current);
-    let diff = rounded - position.current;
-    position.current += Math.sign(diff) * Math.pow(Math.abs(diff), 0.7) * 0.035;
-
     requestAnimationFrame(() => scrolling());
-  }, [objs]);
+  }, []);
 
   useEffect(() => {
     requestAnimationFrame(() => scrolling());
   }, [scrolling]);
 
   const onWheel = (e) => {
+    shaderScroll.current = e.deltaY;
     return (speed.current += e.deltaY * 0.0003);
   };
   function onPan(event, info) {
-    return (speed.current += -1 * info.delta.y * 0.0009);
+    const delta = info.delta.y > 0 ? info.delta.y : -1 * info.delta.x;
+    return (speed.current += -1 * delta * 0.0009);
   }
 
   return (
@@ -52,8 +39,8 @@ function Home() {
       onWheel={onWheel}
       onPan={onPan}
     >
-      <HomeTitles />
-      <SlideShow yPosition={position} slideScale={scale} distance={distance} />
+      <HomeTitles distance={position} />
+      <CircleSlider distance={position} shaderScroll={shaderScroll} />
     </motion.div>
   );
 }

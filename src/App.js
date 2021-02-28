@@ -1,6 +1,6 @@
 import React from "react";
-import { AnimatePresence } from "framer-motion";
-import Home2 from "./containers/Home2";
+// import { AnimatePresence } from "framer-motion";
+import Home from "./containers/Home";
 import About from "./containers/About";
 import Project from "./containers/Project";
 import Header from "./components/Header/Header";
@@ -20,7 +20,7 @@ function App() {
           <Project />
         </Route>
         <Route path="/">
-          <Home2 />
+          <Home />
         </Route>
       </Switch>
     </>
