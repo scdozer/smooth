@@ -79,6 +79,11 @@ p, a, ul, li {
 padding:0px;
 }
 
+.slideTitle{
+  font-weight:bold;
+  font-size: 60px;
+  font-kerning: 1em;
+}
 
 @media screen and (max-width: 992px) {
   .slideContent{

@@ -7,47 +7,41 @@ import { useLoader, useFrame } from "react-three-fiber";
 // import "./../../shaders/wackyImg";
 import "./../../shaders/wobble";
 
+const { innerWidth: width, innerHeight: height } = window;
+const multiplier = {
+  x: width < 900 ? 2 : 5,
+  y: 0,
+  z: width < 900 ? -2 : -2.5,
+  w: width < 900 ? 2 : 4,
+  h: width < 900 ? 1.5 : 3,
+};
+
+const radian_interval = (2.0 * Math.PI) / 5;
+const radius = 200;
+
 export default function Image({ img, index, distance, shaderScroll }) {
   const [active, setActive] = useState(false);
-  const { innerWidth: width, innerHeight: height } = window;
-  const multiplier = {
-    x: width < 900 ? 2 : 4.7,
-    y: 0,
-    z: width < 900 ? -2 : -2.5,
-    w: width < 900 ? 2 : 4,
-    h: width < 900 ? 1.5 : 3,
-  };
 
   const mesh = useRef();
   const wack = useRef();
-  const radian_interval = (2.0 * Math.PI) / 5;
-  const radius = 200;
   const texture = useLoader(THREE.TextureLoader, img);
+
   useFrame(({ clock }) => {
     wack.current.time = clock.elapsedTime;
-    const slideDistance = Math.abs(
-      Math.sin(distance.current + radian_interval * index + radius)
+    const slideDistance = Math.sin(
+      radian_interval * (index + distance.current)
     );
     // wack.current.distanceFromCenter = slideDistance / 2;
-    wack.current.distanceFromCenter = slideDistance;
+    // console.log({ slideDistance });
+    wack.current.distanceFromCenter = 1 + slideDistance;
     mesh.current.position.set(
-      multiplier.x *
-        Math.cos(distance.current + radian_interval * index + radius + 0.4),
+      multiplier.x * Math.sin(radian_interval * (index + distance.current)),
       0,
-      multiplier.z *
-        Math.sin(distance.current + radian_interval * index + radius)
+      multiplier.z * Math.cos(radian_interval * (index + distance.current))
     );
-
-    mesh.current.position.x = lerp(
-      multiplier.x *
-        Math.cos(distance.current + radian_interval * index + radius),
-      0,
-      0.01
-    );
-
-    wack.current.speed = shaderScroll.current;
-    // console.log("wack", wack.current.scale);
+    wack.current.speed = active ? 0 : shaderScroll.current;
   });
+
   return (
     <mesh
       ref={mesh}
@@ -65,7 +59,6 @@ export default function Image({ img, index, distance, shaderScroll }) {
         toneMapped={false}
         // wireframe={true}
       />
-      {/* <meshBasicMaterial attach="material" map={texture} toneMapped={false} /> */}
     </mesh>
   );
 }

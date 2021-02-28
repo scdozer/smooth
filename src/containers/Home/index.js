@@ -7,26 +7,25 @@ import "./../../App.css";
 function Home() {
   const scroll = useRef();
   const shaderScroll = useRef(0);
-  let speed = useRef(0);
-  let position = useRef(-1);
+  let distance = useRef(0);
 
-  const scrolling = useCallback(() => {
-    position.current += speed.current;
-    speed.current *= 0.8;
-    requestAnimationFrame(() => scrolling());
-  }, []);
+  // const scrolling = useCallback(() => {
+  //   position.current += distance.current;
+  //   distance.current *= 0.8;
+  //   requestAnimationFrame(() => scrolling());
+  // }, []);
 
-  useEffect(() => {
-    requestAnimationFrame(() => scrolling());
-  }, [scrolling]);
+  // useEffect(() => {
+  //   requestAnimationFrame(() => scrolling());
+  // }, [scrolling]);
 
   const onWheel = (e) => {
     shaderScroll.current = e.deltaY;
-    return (speed.current += e.deltaY * 0.0003);
+    return (distance.current += e.deltaY * 0.0003);
   };
   function onPan(event, info) {
     const delta = info.delta.y > 0 ? info.delta.y : -1 * info.delta.x;
-    return (speed.current += -1 * delta * 0.0009);
+    return (distance.current += -1 * delta * 0.0009);
   }
 
   return (
@@ -39,8 +38,8 @@ function Home() {
       onWheel={onWheel}
       onPan={onPan}
     >
-      <HomeTitles distance={position} />
-      <CircleSlider distance={position} shaderScroll={shaderScroll} />
+      <HomeTitles distance={distance} />
+      <CircleSlider distance={distance} shaderScroll={shaderScroll} />
     </motion.div>
   );
 }

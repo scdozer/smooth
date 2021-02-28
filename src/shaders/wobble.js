@@ -11,10 +11,10 @@ const WobbleImage = shaderMaterial(
   void main()
   {
     vec4 modelPosition = modelMatrix * vec4(position, 1.0);
-    modelPosition.z += sin(modelPosition.x + (time * 1.0)) * 0.05;
-    modelPosition.x += sin(modelPosition.z + (time * 0.75)) * 0.05;
-    modelPosition.z += (sin(modelPosition.x * 3.1415926535897932384626433832795) * (speed - 1.0) * 0.5 ) * 0.0015;
-    modelPosition.y += (cos(modelPosition.x * 3.1415926535897932384626433832795) * (speed - 1.0) * 0.075 ) * 0.0015;
+    modelPosition.z += sin(modelPosition.x + (time * 1.0)) * 0.075;
+    modelPosition.x += sin(modelPosition.z + (time * 0.75)) * 0.075;
+    modelPosition.z += (cos(modelPosition.x * 3.1415926535897932384626433832795) * speed ) * 0.0005;
+    modelPosition.y += (sin(modelPosition.x * 3.1415926535897932384626433832795) * speed ) * 0.00015;
 
     vec4 viewPosition = viewMatrix * modelPosition;
     vec4 projectedPosition = projectionMatrix * viewPosition;
@@ -38,26 +38,19 @@ const WobbleImage = shaderMaterial(
     float angle = 1.55;
     vec2 p = (vUv - vec2(0.5, 0.5)) * (1.0 - 0.1) + vec2(0.5, 0.5);
 
-    vec2 offset = (speed - 1.0) / 500.0 * vec2(cos(angle), sin(angle));
+    vec2 offset = (speed * 0.0075) / 60.0 * vec2(cos(angle), sin(angle));
     vec4 cr = texture2D(texture1, p + offset);
     vec4 cga = texture2D(texture1, p);
     vec4 cb = texture2D(texture1, p - offset);
 
     float avg = (cr.r + cga.g + cb.b + cga.a) / 3.0;
-    float pct = abs(distanceFromCenter);
-    vec4 color = mix(vec4(vec3(avg), cga.a), vec4(cr.r, cga.g, cb.b, cga.a), distanceFromCenter);
+    float pct = distanceFromCenter;
+    vec4 color = mix(vec4(vec3(avg), cga.a), vec4(cr.r, cga.g, cb.b, cga.a), pct);
     gl_FragColor = vec4(color);
 
-    
-      // gl_FragColor = vec4(color);
-    // float pct = abs(sin(time));
-    // if (speed == 1.0 || speed == -1.0){
-    //   vec4 color = mix(vec4(vec3(avg), cga.a), vec4(cr.r, cga.g, cb.b, cga.a), pct);
-    //   gl_FragColor = vec4(color);
-    // } else {
-    //   vec4 color = mix(vec4(vec3(avg), cga.a), vec4(vec3(avg), cga.a), pct);
-    //   gl_FragColor = vec4(color);
-    // }
+    vec4 t = color * abs(distanceFromCenter);
+    gl_FragColor = t;
+
   }`
 );
 
