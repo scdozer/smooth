@@ -10,7 +10,12 @@ import img3 from "./../../img/photo3.jpg";
 
 const images = [img1, img2, img3, img1, img2];
 
-export default function CircleSlider({ yPosition, slideScale, distance }) {
+export default function CircleSlider({
+  yPosition,
+  slideScale,
+  distance,
+  shaderScroll,
+}) {
   return (
     <div className="canvas">
       <Canvas colorManagement>
@@ -18,7 +23,13 @@ export default function CircleSlider({ yPosition, slideScale, distance }) {
         <Suspense fallback={null}>
           <group>
             {images.map((img, i) => (
-              <Image key={i} index={i} img={img} distance={distance} />
+              <Image
+                key={`image-${i}`}
+                index={i}
+                img={img}
+                distance={distance}
+                shaderScroll={shaderScroll}
+              />
             ))}
           </group>
         </Suspense>

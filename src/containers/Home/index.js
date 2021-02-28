@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import SlideShow from "./../../components/SlideShow";
+import HomeTitles from "./../../components/HomeTitles";
 import "./../../App.css";
 
 function Home() {
@@ -51,6 +52,7 @@ function Home() {
       onWheel={onWheel}
       onPan={onPan}
     >
+      <HomeTitles />
       <SlideShow yPosition={position} slideScale={scale} distance={distance} />
     </motion.div>
   );

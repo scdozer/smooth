@@ -1,11 +1,14 @@
 import * as THREE from "three";
 import React, { useRef, useState } from "react";
+import lerp from "lerp";
 import { motion, AnimatePresence } from "framer-motion";
 import { Html } from "drei";
 import { useLoader, useFrame } from "react-three-fiber";
-import "./../../shaders/wackyImg";
+// import "./../../shaders/wackyImg";
+import "./../../shaders/wobble";
 
-export default function Image({ img, index, distance }) {
+export default function Image({ img, index, distance, shaderScroll }) {
+  const [active, setActive] = useState(false);
   const { innerWidth: width, innerHeight: height } = window;
   const multiplier = {
     x: width < 900 ? 2 : 4.7,
@@ -15,67 +18,52 @@ export default function Image({ img, index, distance }) {
     h: width < 900 ? 1.5 : 3,
   };
 
-  console.log(multiplier.x);
-  const [showHtml, setShowHtml] = useState(false);
   const mesh = useRef();
   const wack = useRef();
-  //   const outer = useRef();
-  //   const html = useRef();
   const radian_interval = (2.0 * Math.PI) / 5;
   const radius = 200;
   const texture = useLoader(THREE.TextureLoader, img);
   useFrame(({ clock }) => {
     wack.current.time = clock.elapsedTime;
-    const slideDistance =
-      -1 * Math.sin(distance.current + radian_interval * index + radius);
-    if (slideDistance <= 1.2 && slideDistance > 0.66) {
-      setShowHtml(true);
-    } else {
-      setShowHtml(false);
-    }
-    wack.current.distanceFromCenter = slideDistance / 2;
+    const slideDistance = Math.abs(
+      Math.sin(distance.current + radian_interval * index + radius)
+    );
+    // wack.current.distanceFromCenter = slideDistance / 2;
+    wack.current.distanceFromCenter = slideDistance;
     mesh.current.position.set(
       multiplier.x *
         Math.cos(distance.current + radian_interval * index + radius + 0.4),
       0,
       multiplier.z *
         Math.sin(distance.current + radian_interval * index + radius)
-      //   Math.cos(distance.current + radian_interval * index + radius),
-      //   0,
-      //   Math.sin(distance.current + radian_interval * index + radius)
     );
+
+    mesh.current.position.x = lerp(
+      multiplier.x *
+        Math.cos(distance.current + radian_interval * index + radius),
+      0,
+      0.01
+    );
+
+    wack.current.speed = shaderScroll.current;
+    // console.log("wack", wack.current.scale);
   });
   return (
-    <mesh ref={mesh}>
-      {showHtml && (
-        <Html fullscreen zIndexRange={[0, 0]}>
-          <motion.div
-            className="slideContent"
-            initial={{ y: 15, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ ease: "easeInOut", duration: 0.5 }}
-          >
-            <h1>Taylor Lundquist &middot; "Hum"</h1>
-            <p>ski</p>
-            <div
-              className="slide-button"
-              onClick={() => window.appHistory.push("/projects")}
-            >
-              view
-            </div>
-          </motion.div>
-        </Html>
-      )}
+    <mesh
+      ref={mesh}
+      scale={active ? [2.5, 2.5, 2.5] : [1, 1, 1]}
+      onClick={(event) => setActive(!active)}
+    >
       <planeBufferGeometry
         attach="geometry"
-        args={[multiplier.w, multiplier.h]}
+        args={[multiplier.w, multiplier.h, 100, 100]}
       />
-      <wackyImage
+      <wobbleImage
         ref={wack}
         attach="material"
         texture1={texture}
         toneMapped={false}
+        // wireframe={true}
       />
       {/* <meshBasicMaterial attach="material" map={texture} toneMapped={false} /> */}
     </mesh>

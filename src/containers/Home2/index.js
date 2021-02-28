@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
+import HomeTitles from "./../../components/HomeTitles";
 import CircleSlider from "./../../components/CircleSlider/CircleSlider";
 import "./../../App.css";
 
 function Home2() {
   const scroll = useRef();
+  const shaderScroll = useRef(0);
   let speed = useRef(0);
   let position = useRef(-1);
 
@@ -19,6 +21,7 @@ function Home2() {
   }, [scrolling]);
 
   const onWheel = (e) => {
+    shaderScroll.current = e.deltaY;
     return (speed.current += e.deltaY * 0.0003);
   };
   function onPan(event, info) {
@@ -36,7 +39,8 @@ function Home2() {
       onWheel={onWheel}
       onPan={onPan}
     >
-      <CircleSlider distance={position} />
+      <HomeTitles distance={position} />
+      <CircleSlider distance={position} shaderScroll={shaderScroll} />
     </motion.div>
   );
 }
