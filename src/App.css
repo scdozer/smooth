@@ -72,12 +72,12 @@ p, a, ul, li {
   margin:0;
   padding:0;
 }
-.slide-button {
+/* .slide-button {
   color: white;
   cursor: pointer;
   margin:0;
 padding:0px;
-}
+} */
 
 .slideTitle{
   font-weight:bold;
@@ -110,13 +110,13 @@ padding:0px;
 
 .homeTitles {
   position: absolute;
-  overflow: scroll;
   top: 40%;
   left: 100px;
   width: 100%;
   height: 150px;
   color: #fff;
   z-index:100;
+  background: transparent;
 }
 .homeTitles h2, .homeTitles p, .homeTitles a {
   color: #fff;

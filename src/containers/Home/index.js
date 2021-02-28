@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
+import lerp from "lerp";
 import HomeTitles from "../../components/HomeTitles";
 import CircleSlider from "../../components/CircleSlider/CircleSlider";
 import "./../../App.css";
@@ -19,13 +20,22 @@ function Home() {
   //   requestAnimationFrame(() => scrolling());
   // }, [scrolling]);
 
+  // const onWheel = (e) => {
+  //   return (speed.current += e.deltaY * 0.0003);
+  // };
+
   const onWheel = (e) => {
-    shaderScroll.current = e.deltaY;
-    return (distance.current += e.deltaY * 0.0003);
+    return (
+      (distance.current += e.deltaY * 0.0003), (shaderScroll.current = e.deltaY)
+    );
   };
   function onPan(event, info) {
-    const delta = info.delta.y > 0 ? info.delta.y : -1 * info.delta.x;
+    const delta = info.delta.y;
     return (distance.current += -1 * delta * 0.0009);
+  }
+
+  function onScroll(e) {
+    console.log({ e });
   }
 
   return (
@@ -35,6 +45,7 @@ function Home() {
       transition={{ ease: "easeIn", duration: 3 }}
       className="app"
       ref={scroll}
+      onScroll={onScroll}
       onWheel={onWheel}
       onPan={onPan}
     >

@@ -20,20 +20,22 @@ export default function HomeTitles({ distance }) {
     <div className="homeTitles">
       <div
         style={{
-          height: 250,
+          height: 220,
           overflow: "hidden",
+          background: "transparent",
         }}
       >
         {state.slides.map((slide) => (
           <motion.div
             style={{
-              height: 250,
+              height: 220,
               overflow: "hidden",
               position: "relative",
+              background: "transparent",
               // transform: `translateY(${distance.current})`,
               cursor: "pointer",
             }}
-            animate={{ y: -distanceTime * 210 }}
+            animate={{ y: -distanceTime * 220 }}
             transition={{ duration: 0.05 }}
             key={slide.title}
           >

@@ -9,15 +9,15 @@ import "./../../shaders/wobble";
 
 const { innerWidth: width, innerHeight: height } = window;
 const multiplier = {
-  x: width < 900 ? 2 : 5,
+  x: width < 900 ? 2 : 6,
   y: 0,
-  z: width < 900 ? -2 : -2.5,
+  z: width < 900 ? -2 : -6,
   w: width < 900 ? 2 : 4,
-  h: width < 900 ? 1.5 : 3,
+  h: width < 900 ? 1.25 : 2.25,
 };
 
-const radian_interval = (2.0 * Math.PI) / 5;
-const radius = 200;
+const radian_interval = (2.0 * Math.PI) / 6;
+// const radius = 1;
 
 export default function Image({ img, index, distance, shaderScroll }) {
   const [active, setActive] = useState(false);
@@ -27,19 +27,28 @@ export default function Image({ img, index, distance, shaderScroll }) {
   const texture = useLoader(THREE.TextureLoader, img);
 
   useFrame(({ clock }) => {
+    // let rounded = Math.round(distance.current);
+    // let diff = rounded - distance.current;
+    // let something =
+    //   distance.current + Math.sign(diff) * Math.pow(Math.abs(diff), 6) * 0.5;
+    // distance.current += Math.sign(diff) * Math.pow(Math.abs(diff), 0.7) * 0.035;
     wack.current.time = clock.elapsedTime;
     const slideDistance = Math.sin(
       radian_interval * (index + distance.current)
     );
-    // wack.current.distanceFromCenter = slideDistance / 2;
-    // console.log({ slideDistance });
     wack.current.distanceFromCenter = 1 + slideDistance;
     mesh.current.position.set(
-      multiplier.x * Math.sin(radian_interval * (index + distance.current)),
+      multiplier.z * Math.cos(radian_interval * (index + distance.current)),
       0,
-      multiplier.z * Math.cos(radian_interval * (index + distance.current))
+      multiplier.x * Math.sin(radian_interval * (index + distance.current))
     );
-    wack.current.speed = active ? 0 : shaderScroll.current;
+    wack.current.speed = shaderScroll.current;
+
+    // position.current += speed.current;
+    // speed.current *= 0.8;
+    // let rounded = Math.round(distance.current);
+    // let diff = rounded - distance.current;
+    // distance.current += Math.sign(diff) * Math.pow(Math.abs(diff), 0.7) * 0.035;
   });
 
   return (
