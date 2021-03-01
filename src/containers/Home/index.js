@@ -25,12 +25,12 @@ function Home() {
 
   const onWheel = (e) => {
     return (
-      (distance.current += e.deltaY * 0.0003), (shaderScroll.current = e.deltaY)
+      (distance.current += e.deltaY * 0.0007), (shaderScroll.current = e.deltaY)
     );
   };
   function onPan(event, info) {
     const delta = info.delta.x;
-    return (distance.current += -1 * delta * 0.0009);
+    return (distance.current += -1 * delta * 0.0007);
   }
 
   function onScroll(e) {
@@ -54,6 +54,22 @@ function Home() {
         shaderScroll={shaderScroll}
         history={history}
       />
+      <motion.div
+        className="scroll"
+        style={{
+          height: 220,
+          overflow: "hidden",
+          position: "relative",
+          background: "transparent",
+          // transform: `translateY(${distance.current})`,
+          cursor: "pointer",
+          opacity: 0,
+        }}
+        animate={{ opacity: distance.current > 1 ? 0 : 1 }}
+        transition={{ duration: 0.05 }}
+      >
+        <h3>scroll down</h3>
+      </motion.div>
     </motion.div>
   );
 }
