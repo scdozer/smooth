@@ -27,20 +27,17 @@ export default function Image({ img, index, distance, shaderScroll }) {
   const texture = useLoader(THREE.TextureLoader, img);
 
   useFrame(({ clock }) => {
-    // let rounded = Math.round(distance.current);
-    // let diff = rounded - distance.current;
-    // let something =
-    //   distance.current + Math.sign(diff) * Math.pow(Math.abs(diff), 6) * 0.5;
-    // distance.current += Math.sign(diff) * Math.pow(Math.abs(diff), 0.7) * 0.035;
     wack.current.time = clock.elapsedTime;
     const slideDistance = Math.sin(
-      radian_interval * (index + distance.current)
+      radian_interval * (index + distance.current + 0.5)
     );
     wack.current.distanceFromCenter = 1 + slideDistance;
     mesh.current.position.set(
-      multiplier.z * Math.cos(radian_interval * (index + distance.current)),
+      multiplier.z *
+        Math.cos(radian_interval * (index + distance.current + 0.5)),
       0,
-      multiplier.x * Math.sin(radian_interval * (index + distance.current))
+      multiplier.x *
+        Math.sin(radian_interval * (index + distance.current + 0.5))
     );
     wack.current.speed = shaderScroll.current;
 

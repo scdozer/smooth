@@ -10,15 +10,19 @@ function Home() {
   const shaderScroll = useRef(0);
   let distance = useRef(0);
 
-  // const scrolling = useCallback(() => {
-  //   position.current += distance.current;
-  //   distance.current *= 0.8;
-  //   requestAnimationFrame(() => scrolling());
-  // }, []);
+  const scrolling = useCallback(() => {
+    let rounded = Math.round(distance.current);
+    let diff = rounded - distance.current;
+    // let something =
+    //   distance.current + Math.sign(diff) * Math.pow(Math.abs(diff), 6) * 0.5;
+    distance.current +=
+      Math.sign(diff) * Math.pow(Math.abs(diff), 0.3) * 0.0035;
+    requestAnimationFrame(() => scrolling());
+  }, []);
 
-  // useEffect(() => {
-  //   requestAnimationFrame(() => scrolling());
-  // }, [scrolling]);
+  useEffect(() => {
+    requestAnimationFrame(() => scrolling());
+  }, [scrolling]);
 
   // const onWheel = (e) => {
   //   return (speed.current += e.deltaY * 0.0003);
