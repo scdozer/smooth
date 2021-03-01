@@ -29,7 +29,7 @@ function Home() {
     );
   };
   function onPan(event, info) {
-    const delta = info.delta.y;
+    const delta = info.delta.x;
     return (distance.current += -1 * delta * 0.0009);
   }
 
