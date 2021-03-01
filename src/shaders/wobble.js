@@ -15,19 +15,18 @@ const WobbleImage = shaderMaterial(
   uniform float speed;
   varying vec2 vUv;
   uniform float distanceFromCenter;
-  // varying vec2 vUv;
-      void main() {
-        vec3 pos = position;
-        vec4 modelPosition = modelMatrix * vec4(position, 1.0);
-        modelPosition.z += sin(modelPosition.x + (time * 0.5)) * 0.075;
-        modelPosition.y += sin(modelPosition.z + (time * 0.5)) * 0.075;
-        // modelPosition.x += ((sin(uv.y * PI) * speed * 0.025) * 0.125);
-        modelPosition.z += ((sin(uv.y * PI) * speed * 0.015) * 0.125);
-        
-          vec4 viewPosition = viewMatrix * modelPosition;
-          vec4 projectedPosition = projectionMatrix * viewPosition;
-        vUv = uv;
-        gl_Position = projectedPosition;
+    void main() {
+      vec3 pos = position;
+      vec4 modelPosition = modelMatrix * vec4(position, 1.0);
+      modelPosition.z += sin(modelPosition.x + (time * 0.5)) * 0.075;
+      modelPosition.y += sin(modelPosition.z + (time * 0.5)) * 0.075;
+      // modelPosition.x += ((sin(uv.y * PI) * speed * 0.025) * 0.125);
+      modelPosition.z += ((sin(uv.y * PI) * speed * 0.035) * 0.125);
+      
+        vec4 viewPosition = viewMatrix * modelPosition;
+        vec4 projectedPosition = projectionMatrix * viewPosition;
+      vUv = uv;
+      gl_Position = projectedPosition;
   }`,
   `
   uniform float time;

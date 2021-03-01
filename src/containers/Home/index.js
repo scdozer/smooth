@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
-import lerp from "lerp";
 import HomeTitles from "../../components/HomeTitles";
 import CircleSlider from "../../components/CircleSlider/CircleSlider";
+import { useHistory } from "react-router-dom";
 import "./../../App.css";
 
 function Home() {
+  const history = useHistory();
   const scroll = useRef();
   const shaderScroll = useRef(0);
   let distance = useRef(0);
@@ -13,8 +14,6 @@ function Home() {
   const scrolling = useCallback(() => {
     let rounded = Math.round(distance.current);
     let diff = rounded - distance.current;
-    // let something =
-    //   distance.current + Math.sign(diff) * Math.pow(Math.abs(diff), 6) * 0.5;
     distance.current +=
       Math.sign(diff) * Math.pow(Math.abs(diff), 0.3) * 0.0035;
     requestAnimationFrame(() => scrolling());
@@ -23,10 +22,6 @@ function Home() {
   useEffect(() => {
     requestAnimationFrame(() => scrolling());
   }, [scrolling]);
-
-  // const onWheel = (e) => {
-  //   return (speed.current += e.deltaY * 0.0003);
-  // };
 
   const onWheel = (e) => {
     return (
@@ -54,7 +49,11 @@ function Home() {
       onPan={onPan}
     >
       <HomeTitles distance={distance} />
-      <CircleSlider distance={distance} shaderScroll={shaderScroll} />
+      <CircleSlider
+        distance={distance}
+        shaderScroll={shaderScroll}
+        history={history}
+      />
     </motion.div>
   );
 }

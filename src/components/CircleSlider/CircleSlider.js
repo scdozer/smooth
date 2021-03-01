@@ -14,7 +14,7 @@ import img6 from "./../../img/treefort.jpg";
 
 const images = [img1, img2, img3, img4, img5, img6];
 
-export default function CircleSlider({ distance, shaderScroll }) {
+export default function CircleSlider({ distance, shaderScroll, history }) {
   return (
     <div className="canvas">
       <Canvas colorManagement>
@@ -28,6 +28,7 @@ export default function CircleSlider({ distance, shaderScroll }) {
                 img={img}
                 distance={distance}
                 shaderScroll={shaderScroll}
+                history={history}
               />
             ))}
           </group>

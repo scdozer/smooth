@@ -1,13 +1,9 @@
 import * as THREE from "three";
-import React, { useRef, useState } from "react";
-import lerp from "lerp";
-import { motion, AnimatePresence } from "framer-motion";
-import { Html } from "drei";
+import React, { useRef, useState, useCallback } from "react";
 import { useLoader, useFrame } from "react-three-fiber";
-// import "./../../shaders/wackyImg";
 import "./../../shaders/wobble";
 
-const { innerWidth: width, innerHeight: height } = window;
+const { innerWidth: width } = window;
 const multiplier = {
   x: width < 900 ? 2 : 6,
   y: 0,
@@ -19,7 +15,7 @@ const multiplier = {
 const radian_interval = (2.0 * Math.PI) / 6;
 // const radius = 1;
 
-export default function Image({ img, index, distance, shaderScroll }) {
+export default function Image({ img, index, distance, shaderScroll, history }) {
   const [active, setActive] = useState(false);
 
   const mesh = useRef();
@@ -40,19 +36,15 @@ export default function Image({ img, index, distance, shaderScroll }) {
         Math.sin(radian_interval * (index + distance.current + 0.5))
     );
     wack.current.speed = shaderScroll.current;
-
-    // position.current += speed.current;
-    // speed.current *= 0.8;
-    // let rounded = Math.round(distance.current);
-    // let diff = rounded - distance.current;
-    // distance.current += Math.sign(diff) * Math.pow(Math.abs(diff), 0.7) * 0.035;
   });
+
+  const handleOnClick = () => history.push("/project");
 
   return (
     <mesh
       ref={mesh}
       scale={active ? [2.5, 2.5, 2.5] : [1, 1, 1]}
-      onClick={(event) => setActive(!active)}
+      onClick={handleOnClick}
     >
       <planeBufferGeometry
         attach="geometry"

@@ -20,7 +20,8 @@ export default function HomeTitles({ distance }) {
     <div className="homeTitles">
       <div
         style={{
-          height: 220,
+          height: "100%",
+          width: "100%",
           overflow: "hidden",
           background: "transparent",
         }}
@@ -39,7 +40,9 @@ export default function HomeTitles({ distance }) {
             transition={{ duration: 0.05 }}
             key={slide.title}
           >
-            <h2 className="slideTitle">{slide.title}</h2>
+            <Link to={slide.link}>
+              <h2 className="slideTitle">{slide.title}</h2>
+            </Link>
           </motion.div>
         ))}
       </div>
