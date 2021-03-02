@@ -33,10 +33,6 @@ function Home() {
     return (distance.current += -1 * delta * 0.0007);
   }
 
-  function onScroll(e) {
-    console.log({ e });
-  }
-
   return (
     <motion.div
       initial={{ y: -20, opacity: 0 }}
@@ -44,7 +40,6 @@ function Home() {
       transition={{ ease: "easeIn", duration: 3 }}
       className="app"
       ref={scroll}
-      onScroll={onScroll}
       onWheel={onWheel}
       onPan={onPan}
     >
@@ -54,22 +49,6 @@ function Home() {
         shaderScroll={shaderScroll}
         history={history}
       />
-      <motion.div
-        className="scroll"
-        style={{
-          height: 220,
-          overflow: "hidden",
-          position: "relative",
-          background: "transparent",
-          // transform: `translateY(${distance.current})`,
-          cursor: "pointer",
-          opacity: 0,
-        }}
-        animate={{ opacity: distance.current > 1 ? 0 : 1 }}
-        transition={{ duration: 0.05 }}
-      >
-        <h3>scroll down</h3>
-      </motion.div>
     </motion.div>
   );
 }
