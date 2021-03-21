@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import lerp from "lerp";
-import HomeTitles from "../../components/HomeTitles";
-import CircleSlider from "../../components/CircleSlider/CircleSlider";
+import HomeTitles from "./HomeTitles";
+import CircleSlider from "./CircleSlider/CircleSlider";
 import { useHistory } from "react-router-dom";
 import "./../../App.css";
 
@@ -36,9 +36,9 @@ function Home() {
       (shaderScroll.current = clamp(e.deltaY, -25, 25))
     );
   };
-  function onPan(info) {
+  function onPan(event, info) {
     const delta = info.delta.x;
-    return (distance.current += -1 * delta * 0.0007);
+    return (distance.current += delta * 0.003);
   }
 
   return (

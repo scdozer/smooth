@@ -1,7 +1,7 @@
 import * as THREE from "three";
-import React, { useRef, useState, useCallback } from "react";
+import React, { useRef } from "react";
 import { useLoader, useFrame } from "react-three-fiber";
-import "./../../shaders/wobble";
+import "./../../../shaders/wobble";
 
 const { innerWidth: width } = window;
 const multiplier = {
@@ -11,13 +11,9 @@ const multiplier = {
   w: width < 900 ? 4 : 4,
   h: width < 900 ? 2.25 : 2.25,
 };
-
 const radian_interval = (2.0 * Math.PI) / 6;
-// const radius = 1;
 
 export default function Image({ img, index, distance, shaderScroll, history }) {
-  const [active, setActive] = useState(false);
-
   const mesh = useRef();
   const wack = useRef();
   const texture = useLoader(THREE.TextureLoader, img);
