@@ -38,7 +38,10 @@ function Home() {
   };
   function onPan(event, info) {
     const delta = info.delta.x;
-    return (distance.current += delta * 0.003);
+    return (
+      (distance.current += delta * 0.003),
+      (shaderScroll.current = clamp(delta * 4, -25, 25))
+    );
   }
 
   return (
