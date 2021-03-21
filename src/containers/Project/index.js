@@ -13,6 +13,7 @@ export default function Projects() {
     <motion.div
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
+      exit={{ opacity: 0 }}
       transition={{ ease: "easeIn", duration: 1 }}
       className="projects"
     >

@@ -1,5 +1,5 @@
 import React from "react";
-// import { AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import Home from "./containers/Home";
 import About from "./containers/About";
 import Project from "./containers/Project";
@@ -12,17 +12,29 @@ function App() {
   return (
     <>
       <Header />
-      <Switch>
-        <Route path="/about">
-          <About />
-        </Route>
-        <Route path="/project">
-          <Project />
-        </Route>
-        <Route path="/">
-          <Home />
-        </Route>
-      </Switch>
+      <Route
+        render={({ location }) => (
+          <AnimatePresence initial={false}>
+            <Switch location={location} key={location.pathname}>
+              <Route exact path="/" render={() => <Home />} />
+              <Route exact path="/project" render={() => <Project />} />
+            </Switch>
+          </AnimatePresence>
+        )}
+      />
+      {/* <AnimatePresence initial={false}>
+        <Switch>
+          <Route path="/about">
+            <About />
+          </Route>
+          <Route path="/project">
+            <Project />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </AnimatePresence> */}
     </>
   );
 }

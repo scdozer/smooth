@@ -9,7 +9,31 @@ export default function HomeTitles({ distance }) {
   const [distanceTime, setDistance] = useState(distance.current);
 
   const scrolling = useCallback(() => {
-    setDistance(distance.current);
+    console.log(distance.current);
+    const cur = Math.abs(distance.current % 10);
+    let distanceTo = cur;
+    // if (cur > 10) {
+    //   distanceTo = cur - 4;
+    // }
+    // if (cur > 9) {
+    //   distanceTo = cur - 5;
+    // }
+    // if (cur > 8) {
+    //   distanceTo = cur - 6;
+    // }
+    // if (cur > 7) {
+    //   distanceTo = cur - 7;
+    // }
+    // if (cur > 6) {
+    //   distanceTo = cur - 6;
+    // }
+    // if (cur > 5) {
+    //   distanceTo = cur - 5;
+    // }
+
+    // let distanceTo = cur > 5.1 ? cur - 5.1 : cur;
+    // console.log(distance.current % 10);
+    setDistance(Math.abs(distanceTo + 0.5));
     requestAnimationFrame(() => scrolling());
   }, [distance]);
 
@@ -26,7 +50,7 @@ export default function HomeTitles({ distance }) {
           background: "transparent",
         }}
       >
-        {state.slides.map((slide) => (
+        {state.slides.map((slide, index) => (
           <motion.div
             style={{
               height: 220,
@@ -35,8 +59,12 @@ export default function HomeTitles({ distance }) {
               background: "transparent",
               // transform: `translateY(${distance.current})`,
               cursor: "pointer",
+              opacity: 1,
             }}
-            animate={{ y: -distanceTime * 220 }}
+            animate={{
+              y: -distanceTime * 220 + 80,
+              // opacity: index + 1 - distanceTime,
+            }}
             transition={{ duration: 0.05 }}
             key={slide.title}
           >

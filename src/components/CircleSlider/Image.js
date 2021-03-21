@@ -41,11 +41,7 @@ export default function Image({ img, index, distance, shaderScroll, history }) {
   const handleOnClick = () => history.push("/project");
 
   return (
-    <mesh
-      ref={mesh}
-      scale={active ? [2.5, 2.5, 2.5] : [1, 1, 1]}
-      onClick={handleOnClick}
-    >
+    <mesh ref={mesh} scale={[1, 1, 1]} onClick={handleOnClick}>
       <planeBufferGeometry
         attach="geometry"
         args={[multiplier.w, multiplier.h, 100, 100]}
