@@ -7,7 +7,7 @@ const { innerWidth: width } = window;
 const multiplier = {
   x: width < 900 ? 6 : 6,
   y: 0,
-  z: width < 900 ? -6 : -6,
+  z: width < 900 ? -7 : -7,
   w: width < 900 ? 4 : 4,
   h: width < 900 ? 2.25 : 2.25,
 };

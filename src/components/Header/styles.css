@@ -13,7 +13,8 @@
     z-index: 10;
     color: white;
     z-index: 10000000;
-    font-family: 'Prata', serif;
+    font-family: 'Inter', 'Helvetica Neue', 'sans-serif';
+    font-weight: 400;
     margin: 0px;
     padding:0px;
     line-height:40px;
@@ -23,7 +24,8 @@
     z-index: 10;
     text-decoration: none;
     color: white;
-    font-family: 'Oswald', serif;
+    font-family: 'Inter', 'Helvetica Neue', 'sans-serif';
+    font-weight: 400;
 }
 
 .header p {
@@ -31,5 +33,6 @@
     color: white;
     margin-top:0px;
     padding:0px;
-    font-family: 'Oswald', serif;
+    font-family: 'Inter', 'Helvetica Neue', 'sans-serif';
+    font-weight: 400;
 }

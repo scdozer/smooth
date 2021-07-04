@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useCallback } from "react";
+import normalizeWheel from 'normalize-wheel';
 import { motion } from "framer-motion";
 import lerp from "lerp";
 import HomeTitles from "./HomeTitles";
@@ -20,8 +21,7 @@ function Home() {
     let goTo =
       distance.current +
       Math.sign(diff) * Math.pow(Math.abs(diff), 0.5) * 0.005;
-    distance.current = clamp(goTo, 0, 5);
-
+    distance.current = goTo;
     shaderScroll.current = lerp(shaderScroll.current, 0, 0.025);
     requestAnimationFrame(() => scrolling());
   }, []);
@@ -31,9 +31,10 @@ function Home() {
   }, [scrolling]);
 
   const onWheel = (e) => {
+    const normalized = normalizeWheel(e);
     return (
-      (distance.current += clamp(e.deltaY, -150, 150) * 0.0007),
-      (shaderScroll.current = clamp(e.deltaY, -25, 25))
+      (distance.current += clamp(normalized.pixelY, -150, 150) * 0.0007),
+      (shaderScroll.current = clamp(normalized.pixelY, -25, 25))
     );
   };
   function onPan(event, info) {

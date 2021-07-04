@@ -1,15 +1,18 @@
-body{overflow:hidden;background: #0e0d0d; font-family: 'Prata', serif;}
+body{overflow:hidden;background: #0e0d0d; font-family: 'Inter', 'Helvetica Neue', 'sans-serif';
+  font-weight: 400;}
 
 a {
   color: white;
-  font-family: 'Prata', serif;
+  font-family: 'Inter', 'Helvetica Neue', 'sans-serif';
+    font-weight: 400;
   text-decoration: none;
 }
 p, h1, h2, h3, h4 {
   color: white;
 }
 p, ul, li {
-  font-family: 'Roboto Condensed', sans-serif;
+  font-family: 'Inter', 'Helvetica Neue', 'sans-serif';
+    font-weight: 400;
 }
 
 .app {
@@ -36,12 +39,6 @@ p, ul, li {
   overflow:hidden;
 }
 
-/* .slideContent {
-  padding-top: calc(100vh - 270px);
-  padding-left: calc(100vw - 80vw);
-  left: 10%;
-  z-index: 2;
-} */
 .projects h1, .projects h2, .projects p {
   color: white;
 }
@@ -51,13 +48,17 @@ p, ul, li {
  top: 0;
  left:0;
  height: 100vh;
- width:100%;
+ width: 100%;
 }
 
-.slideTitle{
+.slideTitle {
+  margin:0px;
   font-weight:bold;
   font-size: 60px;
+  line-height: 200px;
   font-kerning: 1em;
+  font-family: 'Inter', 'Helvetica Neue', 'sans-serif';
+    font-weight: 400;
 }
 
 
@@ -73,13 +74,30 @@ p, ul, li {
   top: 40%;
   left: 100px;
   max-width:100%;
+  min-width: 60%;
   height: 150px;
   color: #fff;
   z-index:100;
   background: transparent;
+  /* background: rgba(24, 241, 4, 0.5); */
+  overflow:hidden;
 }
 .homeTitles h2, .homeTitles p, .homeTitles a {
   color: #fff;
+}
+
+/* .wrap {
+  position: relative;
+  width: "100%";
+  top:0;
+  left: 0;
+} */
+
+.title {
+  position: relative;
+  height: 200px;
+  width: "100%";
+  background: "transparent";
 }
 
 @media (max-width: 992px) {

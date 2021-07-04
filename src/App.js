@@ -22,19 +22,6 @@ function App() {
           </AnimatePresence>
         )}
       />
-      {/* <AnimatePresence initial={false}>
-        <Switch>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/project">
-            <Project />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </AnimatePresence> */}
     </>
   );
 }
